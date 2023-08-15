@@ -9,26 +9,74 @@ var points = 0;
 var timer;
 var isfinished = false;
 var timecount;
-var questionnum;
-var questions = {
-    question1: "abcdef",
-    question2: "ghijk",
-    question3: "lmnop",
-};
+var questions = ["abcdef", "ghijk", "lmnop"];
 var questionWrong;
-
-var answers= {
-    answers1: ["Boolean","Numbers","Alerts","Strings"],
-    answers2: ["1","2","3","4"],
-    answers3: ["5","6","7","8"]
-};
 timecount = 60;
 
+var questions = [{
+    question: "This is my first question",
+    choices: ["Boolean","Numbers","Alerts","Strings"],
+    answer: "Alerts"
+}, {question: "This is my second Question",
+    choices: ["Boolean","Numbers","Alerts","Strings"],
+    answer: "Strings"
+}]
+
+index = 0;
+
+//begin
+// display question
+questions[index].question
+// loop through all choices and display on screen
+questions[index].choices
+// compare user choice with questions[index].answer
+// tell user if right or wrong
+// if wrong subtract time from timer.
+// increment index & clear dom (questions and answers)
+// if all questions anwered or time is up end game
+// if not goto begin
+
+startButton.addEventListener("click", startGame);
 function startGame(){
     startButton.style.display = "none";
     pointsEL.textContent = "Score: " + points;
     startTimer();
-    Beginquestion();
+    Nextquestion();
+}
+function Nextquestion(){
+    console.log(questions[index].answer);
+    QuestionEl.textContent = questions[index].question
+    for (var i = 0; i < questions[index].choices.length; i++){
+        ButtonEl[i].textContent = questions[index].choices[i];
+    }
+    for (var i = 0; i < questions[index].choices.length; i++){  
+        ButtonEl[i].addEventListener("click", checkanswer);
+    }
+}
+function checkanswer(event){
+    console.log(this.textContent)
+    if(this.textContent == questions[index].answer)
+    {
+        displayEL.textContent = "Right"
+        addpoints();
+    }
+    else
+    {
+        displayEL.textContent = "Wrong"
+        questionWrong = true;
+    }
+
+    index++
+
+    if(index < questions.length)
+    {
+        Nextquestion();
+    }
+    else{
+        isfinished = true;
+    }
+
+
 }
 function startTimer(){
     timer = setInterval(function() {
@@ -40,56 +88,24 @@ function startTimer(){
 
         }
         timerElement.textContent = timecount;
-        if (timecount <= 0){
+        if (timecount <= 0 || isfinished == true){
             timecount = 0;
             timerElement.textContent = timecount;
             clearInterval(timer);          
         }
     }, 1000);
 }
-
-function DisplayQuestion(){
-    QuestionEl.textContent = questions.question1;
-    questionnum++;
-}
-function DisplayAnswers(){
-    for (var i = 0; i < answers.answers1.length; i++){
-        ButtonEl[i].textContent = answers.answers1[i];
-    }
-}
-function checkanswer(event){
-    if(this.textContent == "Alerts")
-    {
-        displayEL.textContent = "Right"
-        questionWrong = false;
-        addpoints()
-
-    }
-    else
-    {
-        displayEL.textContent = "Wrong"
-        questionWrong = true;
-    }
-}
 function addpoints()
 {
-    if(questionWrong === false)
-    {
         points = points + 100;
-        console.log(points);
         pointsEL.textContent = "Score: " + points;
-        questionWrong = 0;
-    }
+
 }
 function Beginquestion(){
     DisplayQuestion()
     DisplayAnswers()
+
     for (var i = 0; i < answers.answers1.length; i++){  
         ButtonEl[i].addEventListener("click", checkanswer);
     }
-
-
-
-
 }
-startButton.addEventListener("click", startGame);
