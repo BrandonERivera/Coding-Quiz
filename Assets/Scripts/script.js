@@ -163,7 +163,7 @@ function addpoints()
 // end game shows the scoreform to input your name and score, this is where the savingel button is and shows your final score which is your points
 function endgame(){
     scoreform.style.display = "flex";
-    scoreEL.textContent = "final score: " + points;
+    scoreEL.textContent = "Final score: " + points;
     gameContainer.style.display = "none";
 }
 //savescore from pressing the savingel will create the object of userscore strigy it and add it to the local storage it then emptys the name and runs resets 

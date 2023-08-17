@@ -35,6 +35,7 @@ header{
     border-radius: 10px;
     margin-bottom: 5px;
 }
+
 .descr{
     justify-content: center;
     width: 400px;
@@ -52,6 +53,10 @@ button{
     font-size: large;
 
 }
+button:hover{
+    background-color: lightcyan;
+    box-shadow: inset 0px 0px 9px ;
+}
 /* this is where the leadboard is styled and things below it to make sure it is centered and has edits to its style */
 .leaderboarddescr{
     display: flex;
@@ -67,6 +72,8 @@ button{
 }
 /* styles the game container to be a flex and centeres it in the center of the box answers does the same and makes sure it wraps */
 .gamecontainerarea{
+    font-size: 20px;
+    text-align: center;
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -81,6 +88,7 @@ button{
     width: 250px;
 
 }
+
 /* removes the "-" from li's */
 li{
     list-style: none;
@@ -97,6 +105,7 @@ input{
     padding: 6px;
     margin-top: 10px;
     font-size: 2em;
+    background-color: lightblue;
 
     
 }
@@ -106,6 +115,10 @@ input{
 /* changes the saving score buttong to green and makes it bigger then other buttons */
 .saving-score{
     width: 200px;
+    background-color: limegreen;
+
+}
+.saving-score:hover{
     background-color: limegreen;
 
 }
