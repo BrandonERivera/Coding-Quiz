@@ -32,6 +32,8 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 The quiz is a demonstration of coding skills, in the quiz's code it achieves the above criterias, it also demonstrates styling in css with hovor elements and usage of flex boxes. Using the code from this Quiz will be reference for future assignments to aid me using different javascript functions and will also be a demonstation of capabilities to future employers.
+## Link
+https://brandonerivera.github.io/Coding-Quiz/
 ## Images
 ![image1](./Assets/Images/Programmingquiz-start.png)
 ![image2](./Assets/Images/Programmingquiz-leaderboard.png)
