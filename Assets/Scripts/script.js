@@ -3,15 +3,26 @@ var timerElement = document.querySelector(".timer-count");
 var QuestionEl = document.querySelector(".questions");
 var ButtonEl = document.querySelectorAll(".button");
 var displayEL = document.querySelector(".displaymessage");
-var pointsEL = document.querySelector(".points")
+var pointsEL = document.querySelector(".points");
+var answers = document.querySelector(".Answers");
+var questiontitle = document.querySelector(".questiontitle");
+var gameContainer = document.querySelector(".game-container");
+var scoreform = document.querySelector(".Scoreform");
+var userEL = document.querySelector(".username");
+var scoreEL = document.querySelector(".score");
+var SavingEL = document.querySelector(".saving-score");
+var leaderboardbtn = document.querySelector(".leader-boardbtn");
+var leadboardEL = document.querySelector(".leader-board")
+var exitLeaderboardEL = document.querySelector(".exit-leaderboard");
+
+
 
 var points = 0;
 var timer;
 var isfinished = false;
 var timecount;
-var questions = ["abcdef", "ghijk", "lmnop"];
 var questionWrong;
-timecount = 60;
+var timecount = 60;
 
 var questions = [{
     question: "This is my first question",
@@ -20,7 +31,7 @@ var questions = [{
 }, {question: "This is my second Question",
     choices: ["Boolean","Numbers","Alerts","Strings"],
     answer: "Strings"
-}]
+}];
 
 index = 0;
 
@@ -37,23 +48,66 @@ questions[index].choices
 // if not goto begin
 
 startButton.addEventListener("click", startGame);
+
+SavingEL.addEventListener("click", function(){
+    if(userEL.value !== ""){
+        savescore()
+    }
+})
+leaderboardbtn.addEventListener("click", displayLeaderboard);
+exitLeaderboardEL.addEventListener("click",reset);
+
+function displayLeaderboard(){
+    leadboardEL.innerHTML = "";
+    leadboardEL.style.display = "block";
+    exitLeaderboardEL.style.display = "block";
+    var savedscores = JSON.parse(localStorage.getItem("savedscores"))
+    for(var i = 0; i < savedscores.length; i++){
+        var leaderbordcontainer = document.createElement("div");
+        var namecontainer = document.createElement("div");
+        var scorecontainer = document.createElement("div");
+        var nameEL = document.createElement("p");
+        var scoreEL = document.createElement("p");
+        nameEL.style.width = "400px";
+        scoreEL.style.width = "100px";
+        nameEL.textContent = `Name: ${savedscores[i].name}`;
+        scoreEL.textContent = `Score: ${savedscores[i].score}`;
+        scoreEL.style.marginLeft = "25px";
+        namecontainer.append(nameEL);
+        scorecontainer.append(scoreEL);
+        leaderbordcontainer.append(namecontainer,scorecontainer);
+        leaderbordcontainer.style.display = "flex";
+        leadboardEL.append(leaderbordcontainer);
+    }
+
+}
 function startGame(){
+    isfinished = false;
     startButton.style.display = "none";
+    leaderboardbtn.style.display = "none";
+    gameContainer.style.display = "block";
+
     pointsEL.textContent = "Score: " + points;
     startTimer();
     Nextquestion();
 }
 function Nextquestion(){
+    questiontitle.textContent = "Question: " + (index+1);
+    answers.innerHTML = "";
     console.log(questions[index].answer);
     QuestionEl.textContent = questions[index].question
     for (var i = 0; i < questions[index].choices.length; i++){
-        ButtonEl[i].textContent = questions[index].choices[i];
-    }
-    for (var i = 0; i < questions[index].choices.length; i++){  
-        ButtonEl[i].addEventListener("click", checkanswer);
-    }
+        var li = document.createElement("li");
+        var button = document.createElement("button");
+        button.textContent = questions[index].choices[i]
+        li.appendChild(button);
+        answers.appendChild(li);
+        button.addEventListener("click", checkanswer);
+
+    } 
+
 }
-function checkanswer(event){
+function checkanswer(){
     console.log(this.textContent)
     if(this.textContent == questions[index].answer)
     {
@@ -65,8 +119,7 @@ function checkanswer(event){
         displayEL.textContent = "Wrong"
         questionWrong = true;
     }
-
-    index++
+    index++;
 
     if(index < questions.length)
     {
@@ -74,9 +127,9 @@ function checkanswer(event){
     }
     else{
         isfinished = true;
+        endgame()
     }
-
-
+    console.log(isfinished);
 }
 function startTimer(){
     timer = setInterval(function() {
@@ -89,8 +142,7 @@ function startTimer(){
         }
         timerElement.textContent = timecount;
         if (timecount <= 0 || isfinished == true){
-            timecount = 0;
-            timerElement.textContent = timecount;
+            timerElement.textContent = "Done";
             clearInterval(timer);          
         }
     }, 1000);
@@ -101,11 +153,28 @@ function addpoints()
         pointsEL.textContent = "Score: " + points;
 
 }
-function Beginquestion(){
-    DisplayQuestion()
-    DisplayAnswers()
-
-    for (var i = 0; i < answers.answers1.length; i++){  
-        ButtonEl[i].addEventListener("click", checkanswer);
+function endgame(){
+    scoreform.style.display = "block";
+    scoreEL.textContent = points;
+    gameContainer.style.display = "none";
+}
+function savescore(){
+    var savedscores = JSON.parse(localStorage.getItem("savedscores")) || []
+    var userscore = {
+        name: userEL.value,
+        score: points
     }
+    savedscores.push(userscore)
+    localStorage.setItem("savedscores", JSON.stringify(savedscores))
+    userEL.value = "";
+    reset()
+}
+function reset(){
+    scoreform.style.display = "none";
+    startButton.style.display = "block";
+    leadboardEL.style.display = "none";
+    leaderboardbtn.style.display = "block";
+    exitLeaderboardEL.style.display = "none";
+    index = 0;
+    score = 0;
 }

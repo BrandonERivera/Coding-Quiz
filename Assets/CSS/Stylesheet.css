@@ -1,0 +1,13 @@
+.Scoreform{
+    display: none;
+
+}
+.game-container{
+    display: none;
+}
+.leader-board{
+    display: none;
+}
+.exit-leaderboard{
+    display: none;
+}
