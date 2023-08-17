@@ -1,3 +1,4 @@
+// querySelector variables to grab componenets from the html 
 var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector(".timer-count");
 var QuestionEl = document.querySelector(".questions");
@@ -15,7 +16,7 @@ var leadboardEL = document.querySelector(".leader-board")
 var exitLeaderboardEL = document.querySelector(".exit-leaderboard");
 var startarea = document.querySelector(".starterbuttons")
 
-
+// variables used throughout the javascript
 var points = 0;
 var timer;
 var isfinished = false;
@@ -23,6 +24,7 @@ var timecount;
 var questionWrong;
 var timecount = 60;
 
+//this array holds objects for the questions, with their question, choices, and what the correct answer is"
 var questions = [{
     question: "Commonly used DATA Types do not include?",
     choices: ["Boolean","Numbers","Alerts","Strings"],
@@ -38,17 +40,23 @@ var questions = [{
 
 
 index = 0;
+/*the start button and leaderboard button are the only buttons the user can see on the start screen,
+the start button will start the game while the leaderboardbtn will display the leaderboard*/
 
 startButton.addEventListener("click", startGame);
+leaderboardbtn.addEventListener("click", displayLeaderboard);
 
+// this button is only visable during the endgame function and will save the score and name to a local storage
 SavingEL.addEventListener("click", function(){
     if(userEL.value !== ""){
         savescore()
     }
 })
-leaderboardbtn.addEventListener("click", displayLeaderboard);
 exitLeaderboardEL.addEventListener("click",reset);
 
+/*display leaderboard function shows the leaderboard and the exit leaderboard button, hides the startarea and emptys out the leaderboard to then fill it back in 
+it creates the variable of savedscores and grabs the local storage, it gets the name and score and puts them in their own div and displays them in the leaderboard
+*/
 function displayLeaderboard(){
     startarea.style.display = "none";
     leadboardEL.innerHTML = "";
@@ -73,6 +81,8 @@ function displayLeaderboard(){
     }
 
 }
+/* startgame function hides the start area makes sure the game isnt finised and shows the game container, as well as sets the points and starts
+the timer function and the next question function */
 function startGame(){
     isfinished = false;
     startarea.style.display = "none";
@@ -82,6 +92,8 @@ function startGame(){
     startTimer();
     Nextquestion();
 }
+/* next question for loops through the questions to display the question and choices 
+it then gives these buttons a eventlistener to run the check answer function */
 function Nextquestion(){
     questiontitle.textContent = "Question: " + (index+1);
     answers.innerHTML = "";
@@ -95,6 +107,9 @@ function Nextquestion(){
         button.addEventListener("click", checkanswer);
     } 
 }
+/* checkanswer function checks if whats written on the button is the same as the answer its looking for in the questions object if it is
+it displayed right and add points if not it displays wrong and changes question wrong to true
+after that is increases index and moves to the next question unless theres no more questions which it will call endgame instead */
 function checkanswer(){
     if(this.textContent == questions[index].answer)
     {
@@ -118,6 +133,9 @@ function checkanswer(){
 
     }
 }
+/* start timer starts when the startbutton is clicked, every second it shows the timer which decreases by 1 every second
+if there is a questionwrong it will subtract 5 seconds then flip questionwrong back to false to not continuesly do it
+if timer is ever 0 or lower or if the game is finished it runs endgame */
 function startTimer(){
     timer = setInterval(function() {
         timecount --;
@@ -135,17 +153,20 @@ function startTimer(){
         }
     }, 1000);
 }
+// addpoints function adds points to points the updates points display
 function addpoints()
 {
         points = points + 100;
         pointsEL.textContent = "Score: " + points;
 
 }
+// end game shows the scoreform to input your name and score, this is where the savingel button is and shows your final score which is your points
 function endgame(){
     scoreform.style.display = "flex";
     scoreEL.textContent = "final score: " + points;
     gameContainer.style.display = "none";
 }
+//savescore from pressing the savingel will create the object of userscore strigy it and add it to the local storage it then emptys the name and runs resets 
 function savescore(){
     var savedscores = JSON.parse(localStorage.getItem("savedscores")) || []
     var userscore = {
@@ -157,6 +178,7 @@ function savescore(){
     userEL.value = "";
     reset()
 }
+//reset hides and shows everything back to the start and leaderboard button and hides everything else and resets the score and index to loop again
 function reset(){
     scoreform.style.display = "none";
     startarea.style.display = "flex";

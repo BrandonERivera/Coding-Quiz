@@ -1,3 +1,4 @@
+/* these hide the scoreform, gamecontainer and leaderboard at the start of the game */
 .Scoreform{
     display: none;
 
@@ -12,19 +13,23 @@
     margin-top: 5px;
     display: none;
 }
+/* adds color to the html */
 body{
     background-color: teal;
 }
+/* makes the header large centered and changes the font as well as adds a border at the bottom */
 header{
     font-size: 50px;
     text-align: center;
     border-bottom: 3px black solid;
     font-family: 'Times New Roman', Times, serif;
 }
+/* spaces the content in starterbuttons */
 .starterbuttons{
     display: flex;
     justify-content: space-around;
 }
+/* edits the things in starterbutton to give them width make sure they are spaces as well as some visual edits */
 .starterbuttons button{
     width: 150px;
     border-radius: 10px;
@@ -35,6 +40,7 @@ header{
     width: 400px;
     font-size: 20px;
 }
+/* affects all buttons */
 button{
     display: block;
     background-color: bisque;
@@ -46,6 +52,7 @@ button{
     font-size: large;
 
 }
+/* this is where the leadboard is styled and things below it to make sure it is centered and has edits to its style */
 .leaderboarddescr{
     display: flex;
     flex-direction: column;
@@ -58,6 +65,7 @@ button{
     background-color: aquamarine;
     margin-top: 5px;
 }
+/* styles the game container to be a flex and centeres it in the center of the box answers does the same and makes sure it wraps */
 .gamecontainerarea{
     margin-top: 10px;
     display: flex;
@@ -73,10 +81,12 @@ button{
     width: 250px;
 
 }
+/* removes the "-" from li's */
 li{
     list-style: none;
     padding: 5px;
 }
+/* centers the scoreform at the end and makes sure the input is large and its components are visable */
 .Scoreform{
     flex-direction: column;
     align-items: center;
@@ -93,6 +103,7 @@ input{
 .score{
     font-size: 40px;
 }
+/* changes the saving score buttong to green and makes it bigger then other buttons */
 .saving-score{
     width: 200px;
     background-color: limegreen;
