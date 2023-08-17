@@ -84,6 +84,7 @@ function displayLeaderboard(){
 /* startgame function hides the start area makes sure the game isnt finised and shows the game container, as well as sets the points and starts
 the timer function and the next question function */
 function startGame(){
+    timecount = 60;
     isfinished = false;
     startarea.style.display = "none";
     gameContainer.style.display = "block";
@@ -147,7 +148,6 @@ function startTimer(){
         }
         timerElement.textContent = "Seconds Remain: " + timecount;
         if (timecount <= 0 || isfinished == true){
-            timerElement.textContent = "Done";
             clearInterval(timer); 
             endgame()         
         }
@@ -185,5 +185,5 @@ function reset(){
     leadboardEL.style.display = "none";
     exitLeaderboardEL.style.display = "none";
     index = 0;
-    score = 0;
+    points = 0;
 }
