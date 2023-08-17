@@ -13,39 +13,48 @@
         <header>
             <div class="heading">
                 <h1> Programming Quiz!</h1>
-                <button class="start-button">Start</button>
-                <button class="leader-boardbtn">Leader Board</button>
+                
+                <div class = "starterbuttons">
+                    <button class="start-button">Start</button>
+                    <div class="descr">
+                        <p> This is a programming quiz, it is a test of programming knowledge, every question you answer wrong will subtract score
+                        any questions that are answered right gives you points.
+                        </p>
+                    </div>
+                    <button class="leader-boardbtn">Leader Board</button>
+                </div>
             </div>
         </header>
 
         <main>
             <section class ="game-container">
-                <div class="Question">
-                    <h2 class ="questiontitle">Question 1</h2>
-                    <p class="questions"> </p>
-               </div>
-                <div class="Answers">
-                 </div>
-                 <div class="displaymessage"><p></p></div>
-                 <div id ="timer">
-                    <div class="timer-text"></div>
-                    <div class="timer-count">60</div>
-                    <h3> Seconds Remain</h3>
-                    <div>
-                        <p class ="points"></p>
+                <div class ="gamecontainerarea">
+                    <div class="Question">
+                        <h2 class ="questiontitle">Question 1</h2>
+                        <p class="questions"> </p>
+                    </div>
+                    <div class="Answers">
+                    </div>
+                    <div class="displaymessage"><p></p></div>
+                    <div id ="timer">
+                        <div class="timer-text"></div>
+                        <div class="timer-count">Seconds Remain: 60</div>
+                        <div>
+                            <p class ="points"></p>
+                        </div>
                     </div>
                 </div>
             </section>
             <section>
                 <div class ="Scoreform">
-                    <input class ="username">
+                    <input type="text" class ="username" placeholder="Insert name here">
                     <p class = "score"></p>
                     <button class ="saving-score">Save Score</button>
                     
                 </div>
 
             </section>
-            <section>
+            <section class="leaderboarddescr">
                 <button class ="exit-leaderboard"> Back to start</button>
                 <div class ="leader-board">
 

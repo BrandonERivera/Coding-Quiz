@@ -9,5 +9,93 @@
     display: none;
 }
 .exit-leaderboard{
+    margin-top: 5px;
     display: none;
 }
+body{
+    background-color: teal;
+}
+header{
+    font-size: 50px;
+    text-align: center;
+    border-bottom: 3px black solid;
+    font-family: 'Times New Roman', Times, serif;
+}
+.starterbuttons{
+    display: flex;
+    justify-content: space-around;
+}
+.starterbuttons button{
+    width: 150px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.descr{
+    justify-content: center;
+    width: 400px;
+    font-size: 20px;
+}
+button{
+    display: block;
+    background-color: bisque;
+    text-align: center;
+    width: 100px;
+    height: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: large;
+
+}
+.leaderboarddescr{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+
+
+}
+.leader-board div{
+    background-color: aquamarine;
+    margin-top: 5px;
+}
+.gamecontainerarea{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.Answers{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 250px;
+
+}
+li{
+    list-style: none;
+    padding: 5px;
+}
+.Scoreform{
+    flex-direction: column;
+    align-items: center;
+}
+input{
+    height: 50px;
+    width: 30%;
+    padding: 6px;
+    margin-top: 10px;
+    font-size: 2em;
+
+    
+}
+.score{
+    font-size: 40px;
+}
+.saving-score{
+    width: 200px;
+    background-color: limegreen;
+
+}
+

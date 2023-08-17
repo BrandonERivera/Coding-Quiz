@@ -1,7 +1,6 @@
 var startButton = document.querySelector(".start-button");
 var timerElement = document.querySelector(".timer-count");
 var QuestionEl = document.querySelector(".questions");
-var ButtonEl = document.querySelectorAll(".button");
 var displayEL = document.querySelector(".displaymessage");
 var pointsEL = document.querySelector(".points");
 var answers = document.querySelector(".Answers");
@@ -14,7 +13,7 @@ var SavingEL = document.querySelector(".saving-score");
 var leaderboardbtn = document.querySelector(".leader-boardbtn");
 var leadboardEL = document.querySelector(".leader-board")
 var exitLeaderboardEL = document.querySelector(".exit-leaderboard");
-
+var startarea = document.querySelector(".starterbuttons")
 
 
 var points = 0;
@@ -25,27 +24,20 @@ var questionWrong;
 var timecount = 60;
 
 var questions = [{
-    question: "This is my first question",
+    question: "Commonly used DATA Types do not include?",
     choices: ["Boolean","Numbers","Alerts","Strings"],
     answer: "Alerts"
-}, {question: "This is my second Question",
-    choices: ["Boolean","Numbers","Alerts","Strings"],
-    answer: "Strings"
+}, {question: "In an if statment which symbol represents OR?",
+    choices: ["||","&&","=="],
+    answer: "||"
+}, { question: "which can be used for commenting in Javascript?",
+    choices: ["//","/*  */","A & B","None of the Above"],
+    answer: "A & B"
+
 }];
 
-index = 0;
 
-//begin
-// display question
-questions[index].question
-// loop through all choices and display on screen
-questions[index].choices
-// compare user choice with questions[index].answer
-// tell user if right or wrong
-// if wrong subtract time from timer.
-// increment index & clear dom (questions and answers)
-// if all questions anwered or time is up end game
-// if not goto begin
+index = 0;
 
 startButton.addEventListener("click", startGame);
 
@@ -58,9 +50,10 @@ leaderboardbtn.addEventListener("click", displayLeaderboard);
 exitLeaderboardEL.addEventListener("click",reset);
 
 function displayLeaderboard(){
+    startarea.style.display = "none";
     leadboardEL.innerHTML = "";
-    leadboardEL.style.display = "block";
     exitLeaderboardEL.style.display = "block";
+    leadboardEL.style.display = "block";
     var savedscores = JSON.parse(localStorage.getItem("savedscores"))
     for(var i = 0; i < savedscores.length; i++){
         var leaderbordcontainer = document.createElement("div");
@@ -72,7 +65,6 @@ function displayLeaderboard(){
         scoreEL.style.width = "100px";
         nameEL.textContent = `Name: ${savedscores[i].name}`;
         scoreEL.textContent = `Score: ${savedscores[i].score}`;
-        scoreEL.style.marginLeft = "25px";
         namecontainer.append(nameEL);
         scorecontainer.append(scoreEL);
         leaderbordcontainer.append(namecontainer,scorecontainer);
@@ -83,8 +75,7 @@ function displayLeaderboard(){
 }
 function startGame(){
     isfinished = false;
-    startButton.style.display = "none";
-    leaderboardbtn.style.display = "none";
+    startarea.style.display = "none";
     gameContainer.style.display = "block";
 
     pointsEL.textContent = "Score: " + points;
@@ -94,7 +85,6 @@ function startGame(){
 function Nextquestion(){
     questiontitle.textContent = "Question: " + (index+1);
     answers.innerHTML = "";
-    console.log(questions[index].answer);
     QuestionEl.textContent = questions[index].question
     for (var i = 0; i < questions[index].choices.length; i++){
         var li = document.createElement("li");
@@ -103,12 +93,9 @@ function Nextquestion(){
         li.appendChild(button);
         answers.appendChild(li);
         button.addEventListener("click", checkanswer);
-
     } 
-
 }
 function checkanswer(){
-    console.log(this.textContent)
     if(this.textContent == questions[index].answer)
     {
         displayEL.textContent = "Right"
@@ -127,9 +114,9 @@ function checkanswer(){
     }
     else{
         isfinished = true;
-        endgame()
+        endgame();
+
     }
-    console.log(isfinished);
 }
 function startTimer(){
     timer = setInterval(function() {
@@ -140,10 +127,11 @@ function startTimer(){
             questionWrong = false;
 
         }
-        timerElement.textContent = timecount;
+        timerElement.textContent = "Seconds Remain: " + timecount;
         if (timecount <= 0 || isfinished == true){
             timerElement.textContent = "Done";
-            clearInterval(timer);          
+            clearInterval(timer); 
+            endgame()         
         }
     }, 1000);
 }
@@ -154,8 +142,8 @@ function addpoints()
 
 }
 function endgame(){
-    scoreform.style.display = "block";
-    scoreEL.textContent = points;
+    scoreform.style.display = "flex";
+    scoreEL.textContent = "final score: " + points;
     gameContainer.style.display = "none";
 }
 function savescore(){
@@ -171,9 +159,8 @@ function savescore(){
 }
 function reset(){
     scoreform.style.display = "none";
-    startButton.style.display = "block";
+    startarea.style.display = "flex";
     leadboardEL.style.display = "none";
-    leaderboardbtn.style.display = "block";
     exitLeaderboardEL.style.display = "none";
     index = 0;
     score = 0;
